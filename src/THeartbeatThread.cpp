@@ -23,9 +23,9 @@
 #include "Common.h"
 #include "Http.h"
 // #include "SocketIO.h"
+#include <nlohmann/json.hpp>
 #include <rapidjson/document.h>
 #include <rapidjson/rapidjson.h>
-#include <nlohmann/json.hpp>
 #include <sstream>
 
 namespace json = rapidjson;
@@ -140,26 +140,26 @@ void THeartbeatThread::operator()() {
 
 std::string THeartbeatThread::GenerateCall() {
     nlohmann::json Ret = {
-        {"players", mServer.ClientCount()},
-        {"maxplayers", Application::Settings.getAsInt(Settings::Key::General_MaxPlayers)},
-        {"port", Application::Settings.getAsInt(Settings::Key::General_Port)},
-        {"map", Application::Settings.getAsString(Settings::Key::General_Map)},
-        {"private", Application::Settings.getAsBool(Settings::Key::General_Private)},
-        {"version", Application::ServerVersionString()},
-        {"clientversion", Application::ClientMinimumVersion().AsString()},
-        {"name", Application::Settings.getAsString(Settings::Key::General_Name)},
-        {"tags", Application::Settings.getAsString(Settings::Key::General_Tags)},
-        {"guests", Application::Settings.getAsBool(Settings::Key::General_AllowGuests)},
-        {"modlist", mResourceManager.TrimmedList()},
-        {"modstotalsize", mResourceManager.MaxModSize()},
-        {"modstotal", mResourceManager.ModsLoaded()},
-        {"playerslist", GetPlayers()},
-        {"desc", Application::Settings.getAsString(Settings::Key::General_Description)}
+        { "players", mServer.ClientCount() },
+        { "maxplayers", Application::Settings.getAsInt(Settings::Key::General_MaxPlayers) },
+        { "port", Application::Settings.getAsInt(Settings::Key::General_Port) },
+        { "map", Application::Settings.getAsString(Settings::Key::General_Map) },
+        { "private", Application::Settings.getAsBool(Settings::Key::General_Private) },
+        { "version", Application::ServerVersionString() },
+        { "clientversion", Application::ClientMinimumVersion().AsString() },
+        { "name", Application::Settings.getAsString(Settings::Key::General_Name) },
+        { "tags", Application::Settings.getAsString(Settings::Key::General_Tags) },
+        { "guests", Application::Settings.getAsBool(Settings::Key::General_AllowGuests) },
+        { "modlist", mResourceManager.TrimmedList() },
+        { "modstotalsize", mResourceManager.MaxModSize() },
+        { "modstotal", mResourceManager.ModsLoaded() },
+        { "playerslist", GetPlayers() },
+        { "desc", Application::Settings.getAsString(Settings::Key::General_Description) }
     };
 
     lastCall = Ret.dump();
 
-    //Add sensitive information here because value of lastCall is used for the information packet.
+    // Add sensitive information here because value of lastCall is used for the information packet.
     Ret["uuid"] = Application::Settings.getAsString(Settings::Key::General_AuthKey);
 
     return Ret.dump();
