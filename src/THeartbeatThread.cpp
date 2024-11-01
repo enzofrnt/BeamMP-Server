@@ -140,19 +140,19 @@ void THeartbeatThread::operator()() {
 
 std::string THeartbeatThread::GenerateCall() {
     nlohmann::json Ret = {
-        { "players", mServer.ClientCount() },
-        { "maxplayers", Application::Settings.getAsInt(Settings::Key::General_MaxPlayers) },
-        { "port", Application::Settings.getAsInt(Settings::Key::General_Port) },
+        { "players", std::to_string(mServer.ClientCount()) },
+        { "maxplayers", std::to_string(Application::Settings.getAsInt(Settings::Key::General_MaxPlayers)) },
+        { "port", std::to_string(Application::Settings.getAsInt(Settings::Key::General_Port)) },
         { "map", Application::Settings.getAsString(Settings::Key::General_Map) },
-        { "private", Application::Settings.getAsBool(Settings::Key::General_Private) },
+        { "private", Application::Settings.getAsBool(Settings::Key::General_Private) ? "true" : "false" },
         { "version", Application::ServerVersionString() },
         { "clientversion", Application::ClientMinimumVersion().AsString() },
         { "name", Application::Settings.getAsString(Settings::Key::General_Name) },
         { "tags", Application::Settings.getAsString(Settings::Key::General_Tags) },
-        { "guests", Application::Settings.getAsBool(Settings::Key::General_AllowGuests) },
+        { "guests", Application::Settings.getAsBool(Settings::Key::General_AllowGuests) ? "true" : "false" },
         { "modlist", mResourceManager.TrimmedList() },
-        { "modstotalsize", mResourceManager.MaxModSize() },
-        { "modstotal", mResourceManager.ModsLoaded() },
+        { "modstotalsize", std::to_string(mResourceManager.MaxModSize()) },
+        { "modstotal", std::to_string(mResourceManager.ModsLoaded()) },
         { "playerslist", GetPlayers() },
         { "desc", Application::Settings.getAsString(Settings::Key::General_Description) }
     };
