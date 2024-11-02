@@ -38,7 +38,7 @@ If you need support with understanding the codebase, please write us in the Disc
 
 ## About Building from Source
 
-We only allow building unmodified (original) source code for public use. `master` is considered **unstable** and we will not provide technical support if such a build doesn't work, so always build from a tag. You can checkout a tag with `git checkout tags/TAGNAME`, where `TAGNAME` is the tag, for example `v3.4.1`. See https://github.com/BeamMP/BeamMP-Server/tags for possible versions/tags, as well as https://github.com/BeamMP/BeamMP-Server/releases to check which version is marked as a release/prerelease. We recommend to use the latest release https://github.com/BeamMP/BeamMP-Server/releases/latest
+We only allow building unmodified (original) source code for public use. `master` is considered **unstable** and we will not provide technical support if such a build doesn't work, so always build from a tag. You can checkout a tag with `git checkout tags/TAGNAME`, where `TAGNAME` is the tag, for example `v3.4.1`. See [the tags] https://github.com/BeamMP/BeamMP-Server/tags for possible versions/tags, as well as [the releases] https://github.com/BeamMP/BeamMP-Server/releases to check which version is marked as a release/prerelease. We recommend to use the [latest release] https://github.com/BeamMP/BeamMP-Server/releases/latest
 
 ## Supported Operating Systems
 
