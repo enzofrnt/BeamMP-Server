@@ -38,7 +38,7 @@ If you need support with understanding the codebase, please write us in the Disc
 
 ## About Building from Source
 
-We only allow building unmodified (original) source code for public use. `master` is considered **unstable** and we will not provide technical support if such a build doesn't work, so always build from a tag. You can checkout a tag with `git checkout tags/TAGNAME`, where `TAGNAME` is the tag, for example `v3.1.0`. 
+We only allow building unmodified (original) source code for public use. `master` is considered **unstable** and we will not provide technical support if such a build doesn't work, so always build from a tag. You can checkout a tag with `git checkout tags/TAGNAME`, where `TAGNAME` is the tag, for example `v3.4.1`. See [the tags](https://github.com/BeamMP/BeamMP-Server/tags) for possible versions/tags, as well as [the releases](https://github.com/BeamMP/BeamMP-Server/releases) to check which version is marked as a release/prerelease. We recommend using the [latest release](https://github.com/BeamMP/BeamMP-Server/releases/latest).
 
 ## Supported Operating Systems
 
@@ -65,10 +65,11 @@ If you are building for ARM (like aarch64), you need to run `export VCPKG_FORCE_
 You can build on **Windows, Linux** or other platforms by following these steps:
 
 1. Check out the repository with git: `git clone --recursive https://github.com/BeamMP/BeamMP-Server`.
-2. Go into the directory `cd BeamMP-Server`.
-3. Run CMake `cmake -S . -B bin -DCMAKE_BUILD_TYPE=Release` - this can take a few minutes and may take a lot of disk space and bandwidth.
-4. Build via `cmake --build bin --parallel --config Release -t BeamMP-Server`.
-5. Your executable can be found in `bin/`.
+2. Specify the server version to build by checking out a tag: `git checkout tags/v3.4.1` - [Possible versions/tags](https://github.com/BeamMP/BeamMP-Server/tags)
+3. Go into the directory `cd BeamMP-Server`.
+4. Run CMake `cmake -S . -B bin -DCMAKE_BUILD_TYPE=Release` - this can take a few minutes and may take a lot of disk space and bandwidth.
+5. Build via `cmake --build bin --parallel --config Release -t BeamMP-Server`.
+6. Your executable can be found in `bin/`.
 
 When you make changes to the code, you only have to run step 4 again.
 ### Building for FreeBSD
