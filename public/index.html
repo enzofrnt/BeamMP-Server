@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Control Panel</title>
+</head>
+<body>
+    <h1>Server Control Panel</h1>
+    <form id="serverControlForm">
+        <fieldset>
+            <legend>Server Configuration</legend>
+            <label for="serverName">Server Name:</label>
+            <input type="text" id="serverName" name="serverName"><br><br>
+            <label for="maxPlayers">Max Players:</label>
+            <input type="number" id="maxPlayers" name="maxPlayers"><br><br>
+            <label for="serverPort">Server Port:</label>
+            <input type="number" id="serverPort" name="serverPort"><br><br>
+            <button type="button" onclick="modifyConfig()">Modify Configuration</button>
+        </fieldset>
+        <fieldset>
+            <legend>Server Control</legend>
+            <button type="button" onclick="rebootServer()">Reboot Server</button>
+            <button type="button" onclick="stopServer()">Stop Server</button>
+        </fieldset>
+    </form>
+
+    <script>
+        function modifyConfig() {
+            const serverName = document.getElementById('serverName').value;
+            const maxPlayers = document.getElementById('maxPlayers').value;
+            const serverPort = document.getElementById('serverPort').value;
+
+            // Send the configuration to the server
+            fetch('/modifyConfig', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ serverName, maxPlayers, serverPort })
+            }).then(response => {
+                if (response.ok) {
+                    alert('Configuration modified successfully');
+                } else {
+                    alert('Failed to modify configuration');
+                }
+            });
+        }
+
+        function rebootServer() {
+            // Send a request to reboot the server
+            fetch('/reboot', {
+                method: 'POST'
+            }).then(response => {
+                if (response.ok) {
+                    alert('Server rebooted successfully');
+                } else {
+                    alert('Failed to reboot server');
+                }
+            });
+        }
+
+        function stopServer() {
+            // Send a request to stop the server
+            fetch('/stop', {
+                method: 'POST'
+            }).then(response => {
+                if (response.ok) {
+                    alert('Server stopped successfully');
+                } else {
+                    alert('Failed to stop server');
+                }
+            });
+        }
+    </script>
+</body>
+</html>

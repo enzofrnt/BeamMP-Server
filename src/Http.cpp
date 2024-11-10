@@ -1,21 +1,3 @@
-// BeamMP, the BeamNG.drive multiplayer mod.
-// Copyright (C) 2024 BeamMP Ltd., BeamMP team and contributors.
-//
-// BeamMP Ltd. can be contacted by electronic mail via contact@beammp.com.
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU Affero General Public License as published
-// by the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU Affero General Public License for more details.
-//
-// You should have received a copy of the GNU Affero General Public License
-// along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
 #include "Http.h"
 
 #include "Client.h"
@@ -242,4 +224,24 @@ void Http::Server::THttpServerInstance::operator()() try {
     Application::SetSubsystemStatus("HTTPServer", Application::Status::Good);
 } catch (const std::exception& e) {
     beammp_error("Failed to start http server. Please ensure the http server is configured properly in the ServerConfig.toml, or turn it off if you don't need it. Error: " + std::string(e.what()));
+}
+
+void Http::StartHttpServer() {
+    std::thread([]() {
+        httplib::Server svr;
+
+        svr.Get("/", [](const httplib::Request&, httplib::Response& res) {
+            std::ifstream file("public/index.html");
+            if (file.is_open()) {
+                std::stringstream buffer;
+                buffer << file.rdbuf();
+                res.set_content(buffer.str(), "text/html");
+            } else {
+                res.status = 404;
+                res.set_content("File not found", "text/plain");
+            }
+        });
+
+        svr.listen("0.0.0.0", 8080);
+    }).detach();
 }
