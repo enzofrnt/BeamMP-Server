@@ -73,6 +73,13 @@ FROM debian:12-slim AS runtime
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     liblua5.3-0 \
+    lua5.3 \
+    luarocks \
+    build-essential \
+    pkg-config \
+    liblua5.3-dev \
+    git \
+    unzip \
     curl \
     ca-certificates \
   && rm -rf /var/lib/apt/lists/*
