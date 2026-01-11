@@ -1,9 +1,8 @@
-name: Docker Build (native multi-arch)
+name: Docker Build and Publish (native multi-arch)
 
 on:
   push:
     branches:
-      - 'improve-docker-workflow'
       - 'develop'
       - 'minor'
     tags:
