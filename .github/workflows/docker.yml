@@ -3,6 +3,7 @@ name: Docker Build
 on:
   push:
     branches:
+      - 'improve-docker-workflow'
       - 'develop'
       - 'minor'
     tags:
