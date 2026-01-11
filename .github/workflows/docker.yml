@@ -7,6 +7,7 @@ on:
       - 'minor'
     tags:
       - 'v*'
+  pull_request:
 
 env:
   REGISTRY: ghcr.io
