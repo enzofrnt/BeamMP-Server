@@ -10,9 +10,6 @@ on:
       - 'v*'
   pull_request:
 
-env:
-  REGISTRY: ghcr.io
-
 jobs:
   build:
     strategy:
